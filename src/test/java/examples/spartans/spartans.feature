@@ -21,4 +21,15 @@ Feature: Spartans App Feature testing
       # Given path 'api/spartans', 10 this works and it will concatinate path with id
   When method GET
       Then status 200
+      # Check Content type is application/json
+  Then match header Content-Type == 'application/json'
+      Then print 'Karate is awesome' + 'Hi Ha!!'
+      Then print 'Karate is awesome' , 'Hi Ha!!'
+      #using , instead of + will add the space between the two prints
+  * print response
+      #accesing the fields of json object
+  * print 'ID of this spartan=',response.id
+  * print 'Name of this spartan=',response.name
+  * print 'Gender of this spartan=',response.gender
+  * print 'Phone of this spartan=',response.phone
 
