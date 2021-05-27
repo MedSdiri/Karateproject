@@ -2,7 +2,7 @@ Feature: Spartans App Feature testing
 # Use this ip address that has spartan app with no auth
 # So we can just focus on writing feature file correctly
   Background:
-    * url 'http://54.236.150.168:8000/'
+    * url 'http://54.92.150.105:8000/'
 #    * path '/api'
 
   Scenario: User should be able to call /api/hello to get greeting
@@ -14,3 +14,11 @@ Feature: Spartans App Feature testing
     Then match header Content-Type == 'text/plain;charset=UTF-8'
     # checking the payload
     Then assert response == 'Hello from Sparta'
+
+    Scenario: Get One Spartan and verify response
+      #Sending request to /api/spartan/{id}  id 10
+      Given path '/api/spartans/10'
+      # Given path 'api/spartans', 10 this works and it will concatinate path with id
+  When method GET
+      Then status 200
+
