@@ -32,4 +32,21 @@ Feature: Spartans App Feature testing
   * print 'Name of this spartan=',response.name
   * print 'Gender of this spartan=',response.gender
   * print 'Phone of this spartan=',response.phone
+      # verify fields values
+  Then match response.id == 10
+  Then match response.gender == 'Female'
+  Then match response.name == 'Lorenza'
 
+      Scenario: Search spartan using querry param and check status code
+       # send GET /api/spartans/search?nameContains='a'&gender='Female;
+        Given path '/api/spartans/search'
+        And param nameContains = 'a'
+        And param gender = 'Female'
+        When method GET
+        Then status 200
+  Scenario: Getting XML result from /api/spartans
+    Given path '/api/spartans'
+    And header Accept = 'application/xml'
+    When method GET
+    Then status 200
+    And match header Content-Type == 'application/xml'
